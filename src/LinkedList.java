@@ -42,10 +42,10 @@ public class LinkedList {
     // Insert new node to the given index!
     public void insertNodeToTheGivenIndex(int index, int data){
         int size = size(); // for performance improvement!
-        if(index<0 || index > size){
-            System.out.println("Not a valid index! Insert a valid index and try again!");
-            return;
-        }
+
+        //Index validation
+        checkIndex(index);
+
         if(index==0){
             addNodeToTheStart(data);
         }else if(index==size){
@@ -94,10 +94,8 @@ public class LinkedList {
 
     public void deleteNodeFromGivenIndex(int index){
         int size = size();
-        if(index<0 || index > size){
-            System.out.println("Invalid Index! Insert a valid index and try again!");
-            return;
-        }
+        //Index validation
+        checkIndex(index);
 
         if(index ==0){
             deleteFirstNode();
@@ -118,6 +116,7 @@ public class LinkedList {
             current = current.next;
             i++;
         }
+        assert previous != null;
         previous.next = current.next;
        //current = previous;
     }
@@ -131,6 +130,35 @@ public class LinkedList {
             current = current.next; // Iteration of the current or head
         }
         return size;
+    }
+
+    //Gets the node from given index!
+    public Node getNodeFromGivenIndex(int index){
+        //Index validation
+        checkIndex(index);
+
+        int i = 0;
+        Node current = head;
+        while (i<index){
+            current = current.next;
+            i++;
+        }
+        return current;
+    }
+
+    // Gets data from given index.
+    public int getDataFromGivenIndex(int index){
+        //Index validation
+        checkIndex(index);
+        return getNodeFromGivenIndex(index).data;
+    }
+
+    //Index validation func.
+    public void checkIndex(int index){
+        int size = size();
+        if(index<0||index>size){
+            System.out.println("Invalid Index! Insert a valid index and try again!");
+        }
     }
 
     public void display(){
@@ -179,7 +207,8 @@ public class LinkedList {
         sll.display();
         System.out.println("Size after deleting the node from given index: " + sll.size());
         System.out.println("--------------------------------");
+        int i = 3;
+        System.out.println("Data from given index:"+i+ " data:"  + sll.getDataFromGivenIndex(i));
 
     }
-
 }
