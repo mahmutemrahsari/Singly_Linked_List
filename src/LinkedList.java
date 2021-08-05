@@ -65,6 +65,29 @@ public class LinkedList {
         assert previous != null;
         previous.next = newNode;
     }
+    //Update Node in the given index without adding new node to the list!
+    public void updateNode(int index, int data){
+        //index validation
+        checkIndex(index);
+        if(head.next==null){
+            head = new Node(data);
+            return;
+        }
+
+        Node current = head;
+        Node prev = null;
+        Node newNode = new Node(data);
+        int i = 0;
+        while (i < index){
+            prev = current;
+            current = current.next;
+            i++;
+        }
+        newNode.next=current.next;
+        assert prev != null;
+        prev.next = newNode;
+
+    }
 
     // Delete the last node!
     public void deleteLastNode(){
@@ -207,8 +230,12 @@ public class LinkedList {
         sll.display();
         System.out.println("Size after deleting the node from given index: " + sll.size());
         System.out.println("--------------------------------");
-        int i = 3;
+        int i = 3; int data=200;
         System.out.println("Data from given index:"+i+ " data:"  + sll.getDataFromGivenIndex(i));
-
+        System.out.println("--------------------------------");
+        System.out.println("Update node in the given index: " + i + " with the data: " + data);
+        sll.updateNode( i,data);
+        sll.display();
+        System.out.println("--------------------------------");
     }
 }
